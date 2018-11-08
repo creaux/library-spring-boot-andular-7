@@ -1,0 +1,22 @@
+<app-search-container></app-search-container>
+<div class="list-group">
+  <a
+    href="javascript:void(0)"
+    class="list-group-item list-group-item-action flex-column align-items-start"
+    *ngFor="let book of (books | async)"
+  >
+    <div class="d-flex w-100 justify-content-between">
+      <h5 class="mb-1">{{book.title}}</h5>
+      <small>{{book.published | date: 'short'}}</small>
+    </div>
+    <p class="mb-1">{{book.description}}</p>
+    <div><small *ngFor="let author of book.authors">{{author}}</small></div>
+    <div class="mt-3 float-right">
+      <div class="btn-group btn-group-toggle" data-toggle="buttons">
+        <button class="btn btn-secondary" routerLink="/dashboard/library/view/{{book.id}}">View</button>
+        <button class="btn btn-warning" routerLink="/dashboard/library/edit/{{book.id}}">Edit</button>
+        <button class="btn btn-danger" (click)="delete(book.id)">Delete</button>
+      </div>
+    </div>
+  </a>
+</div>

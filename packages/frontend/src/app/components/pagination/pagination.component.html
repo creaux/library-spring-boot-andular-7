@@ -1,0 +1,26 @@
+<nav *ngIf="page$ | async" aria-label="Page navigation example">
+  <ul class="pagination">
+    <li
+      class="page-item"
+      [ngClass]="{ 'disabled': (current === 0) }"
+    >
+      <a (click)="current > 0 && (emitPage = current - 1)" class="page-link" href="javascript:void(0)">Previous</a></li>
+    <li
+      class="page-item"
+      [ngClass]="{ 'active': key === (current$ | async) }"
+      *ngFor="let key of (totalPages$ | async | set)"
+    >
+      <a (click)="emitPage = key" class="page-link" href="javascript:void(0)">{{key}}</a>
+    </li>
+    <li
+      class="page-item"
+      [ngClass]="{ 'disabled': (totalPages === (current + 1) )}"
+    >
+      <a
+        (click)="(emitPage = current + 1)"
+        class="page-link"
+        href="javascript:void(0)"
+      >Next</a>
+    </li>
+  </ul>
+</nav>

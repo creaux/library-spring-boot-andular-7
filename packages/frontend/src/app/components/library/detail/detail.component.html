@@ -1,0 +1,6 @@
+<div *ngIf="(book$ | async)">
+  <h1>{{(book$ | async).title}}</h1>
+  <p>{{(book$ | async).published | date}}</p>
+  <small>{{(book$ | async).authors}}</small>
+  <p>{{(book$ | async).description}}</p>
+</div>

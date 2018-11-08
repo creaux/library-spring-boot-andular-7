@@ -1,0 +1,65 @@
+<form *ngIf="!!editForm" (ngSubmit)="submit()" [formGroup]="editForm">
+  <div class="form-group">
+    <label for="title">Title</label>
+    <input
+      type="email"
+      class="form-control"
+      id="title"
+      placeholder="Title"
+      formControlName="title"
+      name="title"
+    >
+    <div *ngIf="title.invalid && (title.dirty || title.touched)"
+         class="alert alert-danger mt-3">
+      <div *ngIf="title.errors.required">
+        Title is required.
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea
+      class="form-control"
+      id="description"
+      rows="3"
+      formControlName="description"
+      name="description"
+    ></textarea>
+    <div *ngIf="description.invalid && (description.dirty || description.touched)"
+         class="alert alert-danger mt-3">
+      <div *ngIf="description.errors.required">
+        Description is required.
+      </div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="description">Published</label>
+    <input
+      type="datetime-local"
+      class="form-control"
+      id="published"
+      placeholder="Date"
+      formControlName="published"
+      name="published"
+    >
+  </div>
+  <label>Authors</label>
+  <div class="row">
+    <div class="col" formArrayName="authors" *ngFor="let author of editForm.get('authors').controls; let i = index;">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Author"
+          [formControlName]="i"
+          [name]="'author_' + i"
+        />
+    </div>
+    <div class="col">
+      <button type="button" class="btn btn-secondary form-control" (click)="addAuthor()">+ Add Author</button>
+    </div>
+  </div>
+  <div class="form-group float-right mt-3">
+    <button type="submit" class="btn btn-primary">Save</button>
+    <button class="btn btn-danger ml-3" routerLink="/dashboard/library">Cancel</button>
+  </div>
+</form>
